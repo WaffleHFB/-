@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>前端开发全能工具箱</title>
+        <!-- 基础样式 -->
+        <link rel="stylesheet" href="style.css">
+        <!-- Prism 代码高亮样式 -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" rel="stylesheet" />
+        <!-- Monaco Editor 样式 -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.30.1/min/vs/editor/editor.main.css">
+    </head>
+<body>
+    <div class="container">
+        <header>
+            <h1>前端开发全能工具箱</h1>
+            <nav class="main-nav">
+                <button class="category-btn" data-category="code">代码工具</button>
+                <button class="category-btn" data-category="convert">转换工具</button>
+                <button class="category-btn" data-category="optimize">优化工具</button>
+                <button class="category-btn" data-category="test">测试工具</button>
+                <button class="category-btn" data-category="generate">生成工具</button>
+            </nav>
+        </header>
+
+        <!-- 代码工具分类 -->
+        <div class="tool-category" id="code-tools">
+            <div class="tools-nav">
+                <button class="tool-btn" data-tool="formatter">代码格式化</button>
+                <button class="tool-btn" data-tool="minifier">代码压缩</button>
+                <button class="tool-btn" data-tool="diff">代码对比</button>
+                <button class="tool-btn" data-tool="highlight">代码高亮</button>
+                <button class="tool-btn" data-tool="snippet">代码片段</button>
+                <button class="tool-btn" data-tool="playground">在线编辑器</button>
+            </div>
+        </div>
+
+        <!-- 转换工具分类 -->
+        <div class="tool-category" id="convert-tools">
+            <div class="tools-nav">
+                <button class="tool-btn" data-tool="json">JSON工具</button>
+                <button class="tool-btn" data-tool="base64">Base64</button>
+                <button class="tool-btn" data-tool="svg">SVG编辑器</button>
+                <button class="tool-btn" data-tool="color">颜色转换</button>
+                <button class="tool-btn" data-tool="unit">单位转换</button>
+                <button class="tool-btn" data-tool="time">时间转换</button>
+            </div>
+        </div>
+
+        <!-- 优化工具分类 -->
+        <div class="tool-category" id="optimize-tools">
+            <div class="tools-nav">
+                <button class="tool-btn" data-tool="image">图片优化</button>
+                <button class="tool-btn" data-tool="css">CSS优化</button>
+                <button class="tool-btn" data-tool="js">JS优化</button>
+                <button class="tool-btn" data-tool="html">HTML优化</button>
+                <button class="tool-btn" data-tool="performance">性能分析</button>
+                <button class="tool-btn" data-tool="seo">SEO检查</button>
+            </div>
+        </div>
+
+        <!-- 测试工具分类 -->
+        <div class="tool-category" id="test-tools">
+            <div class="tools-nav">
+                <button class="tool-btn" data-tool="regex">正则测试</button>
+                <button class="tool-btn" data-tool="responsive">响应式测试</button>
+                <button class="tool-btn" data-tool="api">API测试</button>
+                <button class="tool-btn" data-tool="compatibility">兼容性检查</button>
+                <button class="tool-btn" data-tool="accessibility">可访问性测试</button>
+                <button class="tool-btn" data-tool="speed">速度测试</button>
+            </div>
+        </div>
+
+        <!-- 生成工具分类 -->
+        <div class="tool-category" id="generate-tools">
+            <div class="tools-nav">
+                <button class="tool-btn" data-tool="gradient">渐变生成器</button>
+                <button class="tool-btn" data-tool="shadow">阴影生成器</button>
+                <button class="tool-btn" data-tool="animation">动画生成器</button>
+                <button class="tool-btn" data-tool="flex">Flex布局生成器</button>
+                <button class="tool-btn" data-tool="grid">Grid布局生成器</button>
+                <button class="tool-btn" data-tool="icon">图标生成器</button>
+            </div>
+        </div>
+
+        <!-- 工具内容区域 -->
+        <div class="tool-container">
+            <!-- 这里是各个工具的具体内容，默认隐藏 -->
+        </div>
+    </div>
+
+    <!-- 工具模板 -->
+    <template id="formatter-tool">
+        <div class="tool-section">
+            <div class="tool-header">
+                <h2>代码格式化</h2>
+                <select class="language-select">
+                    <option value="html">HTML</option>
+                    <option value="css">CSS</option>
+                    <option value="javascript">JavaScript</option>
+                    <option value="json">JSON</option>
+                    <option value="typescript">TypeScript</option>
+                    <option value="jsx">JSX/React</option>
+                    <option value="vue">Vue</option>
+                    <option value="less">Less</option>
+                    <option value="scss">SCSS</option>
+                </select>
+            </div>
+            <div class="editor-container">
+                <div id="input-editor" class="monaco-editor"></div>
+                <div class="editor-controls">
+                    <button class="format-btn">格式化</button>
+                    <button class="copy-btn">复制</button>
+                    <button class="clear-btn">清除</button>
+                </div>
+                <div id="output-editor" class="monaco-editor"></div>
+            </div>
+        </div>
+    </template>
+
+    <!-- JSON工具模板 -->
+    <template id="json-tool">
+        <div class="tool-section">
+            <div class="tool-header">
+                <h2>JSON工具</h2>
+                <div class="button-group">
+                    <button class="format-json">格式化</button>
+                    <button class="compress-json">压缩</button>
+                    <button class="validate-json">验证</button>
+                    <button class="copy-json">复制</button>
+                </div>
+            </div>
+            <div class="editor-container">
+                <div id="json-input-editor" class="monaco-editor"></div>
+                <div id="json-output-editor" class="monaco-editor"></div>
+            </div>
+        </div>
+    </template>
+
+    <!-- 颜色转换工具模板 -->
+    <template id="color-tool">
+        <div class="tool-section">
+            <div class="tool-header">
+                <h2>颜色转换工具</h2>
+            </div>
+            <div class="color-tool-container">
+                <div class="color-input-section">
+                    <div class="color-picker-wrapper">
+                        <input type="color" id="colorPicker" value="#ff0000">
+                        <span class="color-preview"></span>
+                    </div>
+                    <div class="color-inputs">
+                        <div class="input-group">
+                            <label>HEX:</label>
+                            <input type="text" id="hexInput" value="#ff0000">
+                        </div>
+                        <div class="input-group">
+                            <label>RGB:</label>
+                            <input type="text" id="rgbInput" placeholder="rgb(255, 0, 0)">
+                        </div>
+                        <div class="input-group">
+                            <label>HSL:</label>
+                            <input type="text" id="hslInput" placeholder="hsl(0, 100%, 50%)">
+                        </div>
+                        <div class="input-group">
+                            <label>CMYK:</label>
+                            <input type="text" id="cmykInput" placeholder="cmyk(0%, 100%, 100%, 0%)">
+                        </div>
+                    </div>
+                </div>
+                <div class="color-palette">
+                    <h3>调色板</h3>
+                    <div class="palette-container">
+                        <div class="palette-item" data-color="#ff0000"></div>
+                        <div class="palette-item" data-color="#00ff00"></div>
+                        <div class="palette-item" data-color="#0000ff"></div>
+                        <!-- 更多预设颜色... -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- 图片优化工具模板 -->
+    <template id="image-tool">
+        <div class="tool-section">
+            <div class="tool-header">
+                <h2>图片优化工具</h2>
+            </div>
+            <div class="image-tool-container">
+                <div class="image-upload">
+                    <input type="file" id="imageInput" accept="image/*" multiple>
+                    <div class="upload-area" id="dropZone">
+                        拖放图片到此处或点击上传
+                    </div>
+                </div>
+                <div class="image-settings">
+                    <div class="setting-group">
+                        <label>质量:</label>
+                        <input type="range" id="qualitySlider" min="0" max="100" value="80">
+                        <span id="qualityValue">80%</span>
+                    </div>
+                    <div class="setting-group">
+                        <label>最大宽度:</label>
+                        <input type="number" id="maxWidth" value="1920">
+                    </div>
+                    <div class="setting-group">
+                        <label>格式:</label>
+                        <select id="formatSelect">
+                            <option value="jpeg">JPEG</option>
+                            <option value="png">PNG</option>
+                            <option value="webp">WebP</option>
+                        </select>
+                    </div>
+                    <button id="processImages">处理图片</button>
+                </div>
+                <div class="image-results">
+                    <div class="result-header">
+                        <span>原始图片</span>
+                        <span>优化后</span>
+                    </div>
+                    <div id="imageResults"></div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- 正则测试工具模板 -->
+    <template id="regex-tool">
+        <div class="tool-section">
+            <div class="tool-header">
+                <h2>正则表达式测试器</h2>
+            </div>
+            <div class="regex-tool-container">
+                <div class="input-section">
+                    <div class="input-group">
+                        <label>正则表达式：</label>
+                        <input type="text" id="regexInput" placeholder="输入正则表达式，如：\w+">
+                    </div>
+                    <div class="input-group">
+                        <label>标志：</label>
+                        <input type="text" id="regexFlags" placeholder="g, i, m..." maxlength="4">
+                    </div>
+                </div>
+                <div class="test-section">
+                    <label>测试文本：</label>
+                    <textarea id="testString" placeholder="输入要测试的文本..."></textarea>
+                </div>
+                <div id="regexResult" class="result-section">
+                    <!-- 结果将在这里显示 -->
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- 添加渐变生成器模板 -->
+    <template id="gradient-tool">
+        <div class="tool-section">
+            <div class="tool-header">
+                <h2>CSS渐变生成器</h2>
+            </div>
+            <div class="gradient-tool-container">
+                <div class="controls-section">
+                    <div class="input-group">
+                        <label>颜色1：</label>
+                        <input type="color" id="gradientColor1" value="#ff0000">
+                    </div>
+                    <div class="input-group">
+                        <label>颜色2：</label>
+                        <input type="color" id="gradientColor2" value="#0000ff">
+                    </div>
+                    <div class="input-group">
+                        <label>角度：</label>
+                        <input type="range" id="gradientAngle" min="0" max="360" value="45">
+                        <span class="angle-value">45°</span>
+                    </div>
+                    <div class="input-group">
+                        <label>类型：</label>
+                        <select id="gradientType">
+                            <option value="linear">线性渐变</option>
+                            <option value="radial">径向渐变</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="gradientPreview" class="gradient-preview"></div>
+                <div class="output-section">
+                    <label>CSS代码：</label>
+                    <input type="text" id="gradientOutput" readonly>
+                    <button class="copy-gradient">复制</button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- 阴影生成器模板 -->
+    <template id="shadow-tool">
+        <div class="tool-section">
+            <div class="tool-header">
+                <h2>CSS阴影生成器</h2>
+            </div>
+            <div class="shadow-tool-container">
+                <div class="controls-section">
+                    <div class="input-group">
+                        <label>水平偏移:</label>
+                        <input type="range" id="shadowX" min="-50" max="50" value="0">
+                        <span class="value-display">0px</span>
+                    </div>
+                    <div class="input-group">
+                        <label>垂直偏移:</label>
+                        <input type="range" id="shadowY" min="-50" max="50" value="0">
+                        <span class="value-display">0px</span>
+                    </div>
+                    <div class="input-group">
+                        <label>模糊半径:</label>
+                        <input type="range" id="shadowBlur" min="0" max="100" value="10">
+                        <span class="value-display">10px</span>
+                    </div>
+                    <div class="input-group">
+                        <label>扩散半径:</label>
+                        <input type="range" id="shadowSpread" min="-50" max="50" value="0">
+                        <span class="value-display">0px</span>
+                    </div>
+                    <div class="input-group">
+                        <label>阴影颜色:</label>
+                        <input type="color" id="shadowColor" value="#000000">
+                        <input type="text" id="shadowColorText" value="#000000">
+                    </div>
+                    <div class="input-group">
+                        <label>内阴影:</label>
+                        <input type="checkbox" id="shadowInset">
+                    </div>
+                </div>
+                <div class="preview-section">
+                    <div id="shadowPreview" class="shadow-preview">
+                        <span>预览效果</span>
+                    </div>
+                </div>
+                <div class="output-section">
+                    <label>CSS代码:</label>
+                    <div class="code-output">
+                        <code id="shadowOutput"></code>
+                        <button class="copy-btn">复制</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- 动画生成器模板 -->
+    <template id="animation-tool">
+        <div class="tool-section">
+            <div class="tool-header">
+                <h2>CSS动画生成器</h2>
+            </div>
+            <div class="animation-tool-container">
+                <div class="animation-controls">
+                    <div class="basic-settings">
+                        <div class="input-group">
+                            <label>动画名称:</label>
+                            <input type="text" id="animationName" value="myAnimation">
+                        </div>
+                        <div class="input-group">
+                            <label>持续时间:</label>
+                            <input type="number" id="animationDuration" value="1" min="0.1" step="0.1">
+                            <span>秒</span>
+                        </div>
+                        <div class="input-group">
+                            <label>时间函数:</label>
+                            <select id="animationTiming">
+                                <option value="linear">linear</option>
+                                <option value="ease">ease</option>
+                                <option value="ease-in">ease-in</option>
+                                <option value="ease-out">ease-out</option>
+                                <option value="ease-in-out">ease-in-out</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>延迟时间:</label>
+                            <input type="number" id="animationDelay" value="0" min="0" step="0.1">
+                            <span>秒</span>
+                        </div>
+                        <div class="input-group">
+                            <label>重复次数:</label>
+                            <input type="number" id="animationIterations" value="1" min="1">
+                            <label>
+                                <input type="checkbox" id="animationInfinite">
+                                无限循环
+                            </label>
+                        </div>
+                        <div class="input-group">
+                            <label>方向:</label>
+                            <select id="animationDirection">
+                                <option value="normal">normal</option>
+                                <option value="reverse">reverse</option>
+                                <option value="alternate">alternate</option>
+                                <option value="alternate-reverse">alternate-reverse</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="keyframes-editor">
+                        <h3>关键帧编辑器</h3>
+                        <div class="keyframes-list">
+                            <div class="keyframe-item">
+                                <span>0%</span>
+                                <div class="properties">
+                                    <select class="property-select">
+                                        <option value="transform">transform</option>
+                                        <option value="opacity">opacity</option>
+                                        <option value="background-color">background-color</option>
+                                        <!-- 添加更多属性选项 -->
+                                    </select>
+                                    <input type="text" class="property-value" placeholder="属性值">
+                                    <button class="add-property">+</button>
+                                </div>
+                            </div>
+                            <!-- 更多关键帧会动态添加 -->
+                        </div>
+                        <button id="addKeyframe">添加关键帧</button>
+                    </div>
+                </div>
+                <div class="animation-preview">
+                    <div id="animationPreview" class="preview-box">
+                        预览元素
+                    </div>
+                </div>
+                <div class="animation-code">
+                    <h3>生成的CSS代码</h3>
+                    <pre><code id="animationOutput"></code></pre>
+                    <button class="copy-btn">复制代码</button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Flex布局生成器模板 -->
+    <template id="flex-tool">
+        <div class="tool-section">
+            <div class="tool-header">
+                <h2>Flex布局生成器</h2>
+            </div>
+            <div class="flex-tool-container">
+                <div class="flex-controls">
+                    <div class="container-controls">
+                        <h3>容器属性</h3>
+                        <div class="input-group">
+                            <label>flex-direction:</label>
+                            <select id="flexDirection">
+                                <option value="row">row</option>
+                                <option value="row-reverse">row-reverse</option>
+                                <option value="column">column</option>
+                                <option value="column-reverse">column-reverse</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>justify-content:</label>
+                            <select id="justifyContent">
+                                <option value="flex-start">flex-start</option>
+                                <option value="flex-end">flex-end</option>
+                                <option value="center">center</option>
+                                <option value="space-between">space-between</option>
+                                <option value="space-around">space-around</option>
+                                <option value="space-evenly">space-evenly</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>align-items:</label>
+                            <select id="alignItems">
+                                <option value="stretch">stretch</option>
+                                <option value="flex-start">flex-start</option>
+                                <option value="flex-end">flex-end</option>
+                                <option value="center">center</option>
+                                <option value="baseline">baseline</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>flex-wrap:</label>
+                            <select id="flexWrap">
+                                <option value="nowrap">nowrap</option>
+                                <option value="wrap">wrap</option>
+                                <option value="wrap-reverse">wrap-reverse</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>gap:</label>
+                            <input type="number" id="flexGap" value="10" min="0">
+                            <span>px</span>
+                        </div>
+                    </div>
+                    <div class="item-controls">
+                        <h3>项目属性</h3>
+                        <div class="input-group">
+                            <label>项目数量:</label>
+                            <input type="number" id="flexItemCount" value="3" min="1" max="10">
+                        </div>
+                        <div id="itemProperties">
+                            <!-- 项目属性会动态生成 -->
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-preview">
+                    <div id="flexContainer" class="preview-container">
+                        <!-- Flex项目会动态生成 -->
+                    </div>
+                </div>
+                <div class="flex-code">
+                    <h3>生成的CSS代码</h3>
+                    <pre><code id="flexOutput"></code></pre>
+                    <button class="copy-btn">复制代码</button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Grid布局生成器模板 -->
+    <template id="grid-tool">
+        <div class="tool-section">
+            <div class="tool-header">
+                <h2>Grid布局生成器</h2>
+            </div>
+            <div class="grid-tool-container">
+                <div class="grid-controls">
+                    <div class="container-controls">
+                        <h3>网格容器</h3>
+                        <div class="input-group">
+                            <label>列数:</label>
+                            <input type="number" id="gridColumns" value="3" min="1" max="12">
+                        </div>
+                        <div class="input-group">
+                            <label>行数:</label>
+                            <input type="number" id="gridRows" value="3" min="1" max="12">
+                        </div>
+                        <div class="input-group">
+                            <label>列间距:</label>
+                            <input type="number" id="columnGap" value="10" min="0">
+                            <span>px</span>
+                        </div>
+                        <div class="input-group">
+                            <label>行间距:</label>
+                            <input type="number" id="rowGap" value="10" min="0">
+                            <span>px</span>
+                        </div>
+                        <div class="input-group">
+                            <label>justify-items:</label>
+                            <select id="gridJustifyItems">
+                                <option value="stretch">stretch</option>
+                                <option value="start">start</option>
+                                <option value="center">center</option>
+                                <option value="end">end</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>align-items:</label>
+                            <select id="gridAlignItems">
+                                <option value="stretch">stretch</option>
+                                <option value="start">start</option>
+                                <option value="center">center</option>
+                                <option value="end">end</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="template-controls">
+                        <h3>网格模板</h3>
+                        <div class="grid-template-editor">
+                            <!-- 网格模板编辑器会动态生成 -->
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-preview">
+                    <div id="gridContainer" class="preview-container">
+                        <!-- Grid项目会动态生成 -->
+                    </div>
+                </div>
+                <div class="grid-code">
+                    <h3>生成的CSS代码</h3>
+                    <pre><code id="gridOutput"></code></pre>
+                    <button class="copy-btn">复制代码</button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- SVG编辑器模板 -->
+    <template id="svg-tool">
+        <div class="tool-section">
+            <div class="tool-header">
+                <h2>SVG编辑器</h2>
+            </div>
+            <div class="svg-tool-container">
+                <div class="svg-toolbar">
+                    <div class="shape-tools">
+                        <button data-shape="rect">矩形</button>
+                        <button data-shape="circle">圆形</button>
+                        <button data-shape="ellipse">椭圆</button>
+                        <button data-shape="line">直线</button>
+                        <button data-shape="path">路径</button>
+                        <button data-shape="text">文本</button>
+                    </div>
+                    <div class="property-tools">
+                        <div class="input-group">
+                            <label>填充颜色:</label>
+                            <input type="color" id="svgFill">
+                        </div>
+                        <div class="input-group">
+                            <label>描边颜色:</label>
+                            <input type="color" id="svgStroke">
+                        </div>
+                        <div class="input-group">
+                            <label>描边宽度:</label>
+                            <input type="number" id="svgStrokeWidth" value="1" min="0">
+                        </div>
+                        <div class="input-group">
+                            <label>透明度:</label>
+                            <input type="range" id="svgOpacity" min="0" max="1" step="0.1" value="1">
+                        </div>
+                    </div>
+                </div>
+                <div class="svg-workspace">
+                    <div class="svg-canvas">
+                        <svg id="svgEditor" width="800" height="600">
+                            <!-- SVG内容会动态生成 -->
+                        </svg>
+                    </div>
+                    <div class="svg-layers">
+                        <h3>图层</h3>
+                        <ul id="layersList">
+                            <!-- 图层列表会动态生成 -->
+                        </ul>
+                    </div>
+                </div>
+                <div class="svg-code">
+                    <h3>SVG代码</h3>
+                    <pre><code id="svgOutput"></code></pre>
+                    <button class="copy-btn">复制代码</button>
+                    <button class="download-btn">下载SVG</button>
+                </div>
+            </div>
+        </div>
+    </template>
+    
+    <!-- 在 index.html 中添加单位转换工具模板 -->
+<template id="unit-tool">
+    <div class="tool-section">
+        <div class="tool-header">
+            <h2>CSS单位转换器</h2>
+        </div>
+        <div class="unit-tool-container">
+            <div class="unit-groups">
+                <!-- 像素转换组 -->
+                <div class="unit-group">
+                    <h3>像素(px)转换</h3>
+                    <div class="input-group">
+                        <input type="number" id="pxInput" value="16">
+                        <span>px</span>
+                    </div>
+                    <div class="output-group">
+                        <div class="output-item">
+                            <label>rem:</label>
+                            <input type="text" id="remOutput" readonly>
+                        </div>
+                        <div class="output-item">
+                            <label>em:</label>
+                            <input type="text" id="emOutput" readonly>
+                        </div>
+                        <div class="output-item">
+                            <label>vw:</label>
+                            <input type="text" id="vwOutput" readonly>
+                        </div>
+                        <div class="output-item">
+                            <label>vh:</label>
+                            <input type="text" id="vhOutput" readonly>
+                        </div>
+                    </div>
+                    <div class="settings">
+                        <label>基准字体大小:</label>
+                        <input type="number" id="baseSize" value="16" min="1">
+                        <span>px</span>
+                    </div>
+                </div>
+
+                <!-- 百分比转换组 -->
+                <div class="unit-group">
+                    <h3>百分比转换</h3>
+                    <div class="input-group">
+                        <input type="number" id="percentInput" value="100">
+                        <span>%</span>
+                    </div>
+                    <div class="output-group">
+                        <div class="output-item">
+                            <label>小数:</label>
+                            <input type="text" id="decimalOutput" readonly>
+                        </div>
+                        <div class="output-item">
+                            <label>px:</label>
+                            <input type="text" id="pxFromPercentOutput" readonly>
+                        </div>
+                    </div>
+                    <div class="settings">
+                        <label>参考值:</label>
+                        <input type="number" id="percentBaseSize" value="100" min="1">
+                        <span>px</span>
+                    </div>
+                </div>
+
+                <!-- 视窗单位转换组 -->
+                <div class="unit-group">
+                    <h3>视窗单位转换</h3>
+                    <div class="viewport-info">
+                        <div>当前视窗宽度: <span id="viewportWidth">-</span>px</div>
+                        <div>当前视窗高度: <span id="viewportHeight">-</span>px</div>
+                    </div>
+                    <div class="input-groups">
+                        <div class="input-group">
+                            <input type="number" id="vwInput" value="50">
+                            <span>vw</span>
+                            <input type="text" id="vwToPxOutput" readonly>
+                            <span>px</span>
+                        </div>
+                        <div class="input-group">
+                            <input type="number" id="vhInput" value="50">
+                            <span>vh</span>
+                            <input type="text" id="vhToPxOutput" readonly>
+                            <span>px</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 快速参考 -->
+            <div class="unit-reference">
+                <h3>单位参考</h3>
+                <div class="reference-content">
+                    <p><strong>px:</strong> 像素，固定单位</p>
+                    <p><strong>rem:</strong> 相对于根元素(html)的字体大小</p>
+                    <p><strong>em:</strong> 相对于父元素的字体大小</p>
+                    <p><strong>vw:</strong> 视窗宽度的1%</p>
+                    <p><strong>vh:</strong> 视窗高度的1%</p>
+                    <p><strong>%:</strong> 相对于父元素的百分比</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+    <!-- 继续添加其他工具的模板... -->
+
+<!-- 在 </body> 前的脚本部分替换为： -->
+
+<!-- 1. 加载基础依赖 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-markup.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-css.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-javascript.min.js"></script>
+
+<!-- 2. 加载 Prettier -->
+<script src="https://unpkg.com/prettier@2.8.8/standalone.js"></script>
+<script src="https://unpkg.com/prettier@2.8.8/parser-html.js"></script>
+<script src="https://unpkg.com/prettier@2.8.8/parser-postcss.js"></script>
+<script src="https://unpkg.com/prettier@2.8.8/parser-babel.js"></script>
+
+<!-- 3. 加载 Monaco Editor -->
+<script>
+    // 使用备用 CDN
+    const monacoBaseUrl = 'https://cdn.jsdelivr.net/npm/monaco-editor@0.30.1/min';
+    
+    // 配置 Monaco Editor
+    window.require = { paths: { vs: monacoBaseUrl + '/vs' } };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.30.1/min/vs/loader.js"></script>
+<script>
+    // 等待 Monaco Editor 加载完成
+    require(['vs/editor/editor.main'], function() {
+        // 加载完成后初始化工具
+        const script = document.createElement('script');
+        script.src = 'script.js';
+        script.onload = function() {
+            // 隐藏加载提示
+            document.getElementById('loading-status').style.display = 'none';
+            // 初始化工具
+            if (typeof ToolManager !== 'undefined') {
+                window.toolManager = new ToolManager();
+                console.log('工具初始化成功！');
+            }
+        };
+        script.onerror = function() {
+            document.getElementById('loading-status').innerHTML = `
+                加载失败：无法加载 script.js<br>
+                <button onclick="location.reload()" style="margin-top: 10px; padding: 5px 10px; 
+                    background: white; color: #2196F3; border: none; border-radius: 4px; cursor: pointer;">
+                    重新加载
+                </button>
+            `;
+        };
+        document.body.appendChild(script);
+    });
+</script>
+
+<!-- 4. 加载状态提示 -->
+<div id="loading-status" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+    background: #2196F3; color: white; padding: 20px; border-radius: 8px;">
+    正在加载依赖库...
+</div>
+
+<!-- 5. 错误处理 -->
+<script>
+    window.onerror = function(msg, url, lineNo, columnNo, error) {
+        console.error('Error:', msg, '\nURL:', url, '\nLine:', lineNo, '\nColumn:', columnNo);
+        const loadingStatus = document.getElementById('loading-status');
+        if (loadingStatus) {
+            loadingStatus.innerHTML = `
+                加载失败：${msg}<br>
+                <button onclick="location.reload()" style="margin-top: 10px; padding: 5px 10px; 
+                    background: white; color: #2196F3; border: none; border-radius: 4px; cursor: pointer;">
+                    重新加载
+                </button>
+            `;
+        }
+        return false;
+    };
+</script>
+
+<!-- 4. 最后加载我们的脚本 -->
+<script src="script.js"></script>
+</body>
+</html> 

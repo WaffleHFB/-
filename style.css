@@ -1,0 +1,970 @@
+/* 基础样式重置和通用样式 */
+:root {
+    --primary-color: #4CAF50;
+    --secondary-color: #2196F3;
+    --error-color: #f44336;
+    --success-color: #4CAF50;
+    --warning-color: #ff9800;
+    --text-color: #333;
+    --border-color: #ddd;
+    --bg-color: #f5f5f5;
+    --card-bg: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+}
+
+/* 容器样式 */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* 头部样式 */
+header {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: var(--text-color);
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+/* 导航样式 */
+.main-nav {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.category-btn {
+    padding: 12px 24px;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 6px;
+    background: var(--secondary-color);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.category-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.category-btn.active {
+    background: var(--primary-color);
+}
+
+/* 工具导航样式 */
+.tools-nav {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    background: var(--card-bg);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.tool-btn {
+    padding: 8px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tool-btn:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+.tool-btn.active {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* 工具区域样式 */
+.tool-section {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.tool-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* 编辑器容器样式 */
+.editor-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    height: 500px;
+}
+
+.monaco-editor {
+    height: 100%;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.editor-controls {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+/* 表单元素样式 */
+select, input, button {
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+select {
+    min-width: 150px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .editor-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .monaco-editor {
+        height: 300px;
+    }
+}
+
+/* 工具特定样式 */
+.color-picker {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.gradient-preview {
+    height: 200px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.flex-container, .grid-container {
+    border: 2px dashed var(--border-color);
+    padding: 20px;
+    margin: 20px 0;
+    min-height: 200px;
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* 工具提示 */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 10px;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+/* 图片优化工具样式 */
+.image-tool-container {
+    padding: 20px;
+}
+
+.image-upload {
+    border: 2px dashed var(--border-color);
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.upload-area {
+    padding: 40px;
+    background: #f8f8f8;
+    border-radius: 4px;
+}
+
+.upload-area.dragover {
+    background: #e3f2fd;
+    border-color: var(--primary-color);
+}
+
+.image-settings {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.setting-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.image-results {
+    display: grid;
+    gap: 20px;
+}
+
+.image-result-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 15px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.image-info {
+    padding: 10px;
+    background: #f8f8f8;
+    border-radius: 4px;
+}
+
+.image-preview img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+/* 颜色转换工具样式 */
+.color-tool-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+
+.color-input-section {
+    display: flex;
+    gap: 20px;
+}
+
+.color-picker-wrapper {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+.color-picker-wrapper input[type="color"] {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.color-inputs {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.input-group label {
+    min-width: 60px;
+}
+
+.color-palette {
+    padding: 20px;
+    background: #f8f8f8;
+    border-radius: 8px;
+}
+
+.palette-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.palette-item {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid var(--border-color);
+}
+
+/* JSON工具样式 */
+.json-tool-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .color-tool-container,
+    .image-result-item {
+        grid-template-columns: 1fr;
+    }
+
+    .color-input-section {
+        flex-direction: column;
+    }
+
+    .color-picker-wrapper {
+        width: 100%;
+        height: 60px;
+    }
+}
+
+/* 正则测试工具样式 */
+.regex-tool-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.regex-tool-container .input-section {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px;
+}
+
+.regex-tool-container .test-section textarea {
+    width: 100%;
+    min-height: 150px;
+}
+
+.regex-tool-container .result-section {
+    padding: 15px;
+    background: #f8f8f8;
+    border-radius: 4px;
+    min-height: 100px;
+}
+
+.regex-tool-container .match {
+    background: #e3f2fd;
+    padding: 2px 4px;
+    border-radius: 2px;
+    margin: 2px;
+    display: inline-block;
+}
+
+/* 渐变生成器样式 */
+.gradient-tool-container {
+    display: grid;
+    gap: 20px;
+}
+
+.gradient-tool-container .controls-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.gradient-preview {
+    height: 200px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.gradient-tool-container .output-section {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.gradient-tool-container .output-section input {
+    flex: 1;
+}
+
+/* 成功消息样式 */
+.success-message {
+    background: var(--success-color);
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* 阴影生成器样式 */
+.shadow-tool-container {
+    display: grid;
+    gap: 20px;
+    padding: 20px;
+}
+
+.shadow-tool-container .controls-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    background: #f8f8f8;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.shadow-preview {
+    width: 200px;
+    height: 200px;
+    margin: 40px auto;
+    background: white;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #666;
+}
+
+.shadow-tool-container .input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.shadow-tool-container .input-group label {
+    min-width: 100px;
+}
+
+.shadow-tool-container .input-group input[type="range"] {
+    flex: 1;
+}
+
+.shadow-tool-container .value-display {
+    min-width: 50px;
+    text-align: right;
+}
+
+.shadow-tool-container .code-output {
+    background: #2d2d2d;
+    color: #fff;
+    padding: 15px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.shadow-tool-container .code-output code {
+    font-family: 'Courier New', Courier, monospace;
+    flex: 1;
+}
+
+.shadow-tool-container input[type="color"] {
+    width: 50px;
+    height: 30px;
+    padding: 0;
+    border: none;
+}
+
+.shadow-tool-container input[type="text"] {
+    width: 80px;
+}
+
+/* 动画生成器样式 */
+.animation-tool-container {
+    display: grid;
+    gap: 20px;
+    padding: 20px;
+}
+
+.animation-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    background: #f8f8f8;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.basic-settings {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.keyframes-editor {
+    border-left: 1px solid var(--border-color);
+    padding-left: 20px;
+}
+
+.keyframes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 15px 0;
+}
+
+.keyframe-item {
+    background: white;
+    padding: 15px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.keyframe-header {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.keyframe-header input {
+    width: 60px;
+}
+
+.properties {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.property {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.property-select {
+    min-width: 120px;
+}
+
+.property-value {
+    flex: 1;
+}
+
+.preview-box {
+    width: 100px;
+    height: 100px;
+    background: var(--primary-color);
+    margin: 50px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border-radius: 4px;
+    position: relative;
+}
+
+.animation-code {
+    background: #2d2d2d;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.animation-code pre {
+    margin: 0;
+    white-space: pre-wrap;
+}
+
+.animation-code code {
+    color: #fff;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.remove-keyframe,
+.remove-property {
+    background: var(--error-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    padding: 0;
+    cursor: pointer;
+}
+
+.add-property {
+    background: var(--success-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    padding: 0;
+    cursor: pointer;
+}
+
+/* Flex 工具样式 */
+.flex-tool-container {
+    display: grid;
+    gap: 20px;
+    padding: 20px;
+}
+
+.flex-controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    background: #f8f8f8;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.preview-container {
+    min-height: 300px;
+    background: #fff;
+    border: 2px dashed var(--border-color);
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+}
+
+.flex-item {
+    padding: 20px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 4px;
+    text-align: center;
+    min-width: 100px;
+}
+
+.flex-code {
+    background: #2d2d2d;
+    padding: 20px;
+    border-radius: 4px;
+    color: #fff;
+}
+
+.flex-code pre {
+    margin: 0;
+    white-space: pre-wrap;
+}
+
+/* Grid 工具样式 */
+.grid-tool-container {
+    display: grid;
+    gap: 20px;
+    padding: 20px;
+}
+
+.grid-controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    background: #f8f8f8;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.grid-template-editor {
+    display: grid;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.grid-row {
+    display: flex;
+    gap: 5px;
+}
+
+.grid-cell {
+    flex: 1;
+    padding: 5px;
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    text-align: center;
+    font-size: 12px;
+    min-width: 60px;
+}
+
+.grid-preview {
+    min-height: 400px;
+    background: #fff;
+    border: 2px dashed var(--border-color);
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+}
+
+.grid-item {
+    padding: 20px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.grid-code {
+    background: #2d2d2d;
+    padding: 20px;
+    border-radius: 4px;
+    color: #fff;
+}
+
+.grid-code pre {
+    margin: 0;
+    white-space: pre-wrap;
+}
+
+/* 在动画生成器样式中添加 */
+.animation-presets {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.animation-presets button {
+    padding: 8px 16px;
+    background: var(--secondary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.animation-presets button:hover {
+    background: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.preview-box {
+    width: 100px;
+    height: 100px;
+    background: var(--primary-color);
+    margin: 50px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border-radius: 4px;
+    position: relative;
+}
+
+/* SVG编辑器样式 */
+.svg-tool-container {
+    display: grid;
+    gap: 20px;
+    padding: 20px;
+}
+
+.svg-toolbar {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 20px;
+    background: #f8f8f8;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.shape-tools {
+    display: flex;
+    gap: 10px;
+}
+
+.shape-tools button {
+    padding: 8px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.shape-tools button.active {
+    background: var(--primary-color);
+    color: white;
+}
+
+.property-tools {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.svg-workspace {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 20px;
+}
+
+.svg-canvas {
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#svgEditor {
+    width: 100%;
+    height: 600px;
+    background: white;
+}
+
+.svg-layers {
+    background: #f8f8f8;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+#layersList {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+#layersList li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    background: white;
+    margin: 5px 0;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#layersList li:hover {
+    background: #f0f0f0;
+}
+
+.delete-layer {
+    background: var(--error-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.svg-code {
+    background: #2d2d2d;
+    padding: 20px;
+    border-radius: 8px;
+    color: #fff;
+}
+
+.svg-code pre {
+    margin: 10px 0;
+    max-height: 200px;
+    overflow: auto;
+}
+
+/* SVG元素样式 */
+#svgEditor .selected {
+    outline: 2px dashed var(--primary-color);
+}
+
+/* 添加到现有的 CSS 中 */
+.loading {
+    padding: 20px;
+    text-align: center;
+    color: #666;
+}
+
+.error-message {
+    padding: 15px;
+    background: #ff5252;
+    color: white;
+    border-radius: 4px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.error-message button {
+    background: white;
+    color: #ff5252;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* 添加到现有的 CSS 中 */
+.loading-message {
+    padding: 15px;
+    background: #2196F3;
+    color: white;
+    border-radius: 4px;
+    margin: 10px 0;
+    text-align: center;
+}
+
+.error-message {
+    padding: 15px;
+    background: #ff5252;
+    color: white;
+    border-radius: 4px;
+    margin: 10px 0;
+}
+
+.error-message button {
+    background: white;
+    color: #ff5252;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    margin-left: 10px;
+    cursor: pointer;
+}
